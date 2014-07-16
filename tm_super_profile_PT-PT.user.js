@@ -7,52 +7,63 @@
 // @exclude		https://trophymanager.com/players
 // @author    	  Joao Manuel Ferreira Fernandes
 // @github		  https://github.com/IvanMisyats/trophymanager
-// @grant 		none
+// @grant 		GM_log
 // ==/UserScript==
 
+// show an error
+function error(message) {
+	GM_log(message);
+};
 
-// Array to setup the weights of particular skills for each player's actual ability
-// This is the direct weight to be given to each skill.
-// Array maps to these skills:
-//		 [Str,Sta,Pac,Mar,Tac,Wor,Pos,Pas,Cro,Tec,Hea,Fin,Lon,Set]
-var positions = 
-		[[  1,  3,  1,  1,  1,  3,  3,  2,  2,  2,  1,  3,  3,  3], // D C
-		 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // D L
-		 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // D R
-		 [  1,  2,  2,  1,  1,  1,  1,  1,  2,  2,  1,  3,  3,  3], // DM C
-		 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // DM L
-		 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // DM R
-		 [  2,  2,  3,  1,  1,  1,  1,  1,  3,  1,  2,  3,  3,  3], // M C 
-		 [  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  2,  3,  3,  3], // M L
-		 [  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  2,  3,  3,  3], // M R
-		 [  2,  3,  3,  2,  2,  1,  1,  1,  3,  1,  2,  1,  1,  3], // OM C
-		 [  2,  2,  1,  3,  3,  2,  2,  3,  1,  1,  2,  2,  2,  3], // OM L
-		 [  2,  2,  1,  3,  3,  2,  2,  3,  1,  1,  2,  2,  2,  3], // OM R
-		 [  1,  2,  2,  3,  3,  2,  2,  3,  3,  2,  1,  1,  1,  3], // F
-		 [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]]; // Gk
+if (location.href.indexOf("/players/") != -1) {
+	function getUserLanguage() {
+		return document.cookie.match(/trophymanager\[language\]=(\w+)/)[1] || "uk";
+	};
+	var userLanguage = getUserLanguage();
+
+	// Array to setup the weights of particular skills for each player's actual ability
+	// This is the direct weight to be given to each skill.
+	// Array maps to these skills:
+	//		 [Str,Sta,Pac,Mar,Tac,Wor,Pos,Pas,Cro,Tec,Hea,Fin,Lon,Set]
+	var positions = 
+			[[  1,  3,  1,  1,  1,  3,  3,  2,  2,  2,  1,  3,  3,  3], // D C
+			 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // D L
+			 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // D R
+			 [  1,  2,  2,  1,  1,  1,  1,  1,  2,  2,  1,  3,  3,  3], // DM C
+			 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // DM L
+			 [  2,  3,  1,  1,  1,  3,  3,  2,  2,  2,  2,  3,  3,  3], // DM R
+			 [  2,  2,  3,  1,  1,  1,  1,  1,  3,  1,  2,  3,  3,  3], // M C 
+			 [  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  2,  3,  3,  3], // M L
+			 [  2,  2,  1,  1,  1,  1,  1,  1,  1,  1,  2,  3,  3,  3], // M R
+			 [  2,  3,  3,  2,  2,  1,  1,  1,  3,  1,  2,  1,  1,  3], // OM C
+			 [  2,  2,  1,  3,  3,  2,  2,  3,  1,  1,  2,  2,  2,  3], // OM L
+			 [  2,  2,  1,  3,  3,  2,  2,  3,  1,  1,  2,  2,  2,  3], // OM R
+			 [  1,  2,  2,  3,  3,  2,  2,  3,  3,  2,  1,  1,  1,  3], // F
+			 [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]]; // Gk
 
 
-// [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]
-// Weights need to total 100
-var weights = [ [85,12, 3],  // D C
-		[70,25, 5],  // D L
-		[70,25, 5],  // D R
-		[90,10, 0],  // DM C
-		[50,40,10],  // DM L
-		[50,40,10],  // DM R
-		[85,12, 3],  // M C			   
-		[90, 7, 3],  // M L
-		[90, 7, 3],  // M R
-		[90,10, 0],  // OM C
-		[60,35, 5],  // OM L
-		[60,35, 5],  // OM R
-		[80,18, 2],  // F
-		[50,42, 8]]; // GK
+	// [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]
+	// Weights need to total 100
+	var weights = [ [85,12, 3],  // D C
+			[70,25, 5],  // D L
+			[70,25, 5],  // D R
+			[90,10, 0],  // DM C
+			[50,40,10],  // DM L
+			[50,40,10],  // DM R
+			[85,12, 3],  // M C			   
+			[90, 7, 3],  // M L
+			[90, 7, 3],  // M R
+			[90,10, 0],  // OM C
+			[60,35, 5],  // OM L
+			[60,35, 5],  // OM R
+			[80,18, 2],  // F
+			[50,42, 8]]; // GK
 
-var positionNames = ["D C", "D L", "D D", "DM C", "DM L", "DM R", "M C", "M L", "M R", "OM C", "OM L", "OM R", "F", "Gk"];
-var positionFullNames = ["Defender Center", "Defender Left", "Defender Right", "Defensive Midfielder Center", "Defensive Midfielder Left", "Defensive Midfielder Right", "Midfielder Center", "Midfielder Left", "Midfielder Right", "Offensive Midfielder Center", "Offensive Midfielder Left", "Offensive Midfielder Right", "Forward", "Goalkeeper"];
-
-if (location.href.indexOf("/players/") != -1){
+	var positionNames = ["D C", "D L", "D D", "DM C", "DM L", "DM R", "M C", "M L", "M R", "OM C", "OM L", "OM R", "F", "Gk"];
+	var positionFullNames = {
+		uk: ["Defender Center", "Defender Left", "Defender Right", "Defensive Midfielder Center", "Defensive Midfielder Left", "Defensive Midfielder Right", "Midfielder Center", "Midfielder Left", "Midfielder Right", "Offensive Midfielder Center", "Offensive Midfielder Left", "Offensive Midfielder Right", "Forward", "Goalkeeper"],
+		ua: ["Захисник Центральний", "Захисник Лівий", "Захисник Right", "Опорний Півзахисник Центральний", "Опорний Півзахисник Лівий", "Опорний Півзахисник Right", "Півзахисник Центральний", "Півзахисник Лівий", "Півзахисник Правий", "Атакувальний Півзахисник Центральний", "Атакувальний Півзахисник Лівий", "Атакувальний Півзахисник Правий", "Нападник", "Воротар"],
+	}[userLanguage];
 
 	// positionIndex is the array of skill priority for this player.
 	// skills is an array of skills for each user
@@ -186,6 +197,10 @@ if (location.href.indexOf("/players/") != -1){
 	};
 
 	document.findPositionIndex = function(position) {
+		if (!positionFullNames) {
+			return -1;
+		}
+
 		var index = -1;
 		for (var k=0; k< positionFullNames.length; k++) {
 			if (position.indexOf(positionFullNames[k]) == 0) {
@@ -223,7 +238,7 @@ if (location.href.indexOf("/players/") != -1){
 		var setP = [0, 0, 0];
 		var defending = [0, 0, 0, 0, 0];
 		var gameplayStyle = [0, 0, 0, 0, 0];
-		var Pos = 0;
+		var Pos = -1;
 		var positionCell = document.getElementsByClassName("favposition long")[0].childNodes;
 		var positionArray = [];
 		if (positionCell.length == 1){
@@ -347,11 +362,20 @@ if (location.href.indexOf("/players/") != -1){
 	(function() {
 		var playerTable = document.getElementsByClassName("skill_table zebra")[0];
 		var skillArray = document.getSkills(playerTable);
-		var SKs = computeSK(skillArray)[0];
-		var Goks = computeSK(skillArray)[1];
-		var defending = computeSK(skillArray)[4];
-		var setPieces = computeSK(skillArray)[3];
-		var gameplayStyle = computeSK(skillArray)[5];
+
+		var computedSkills = computeSK(skillArray);
+
+		if (computedSkills[2] == -1) {
+			error('Language '+ userLanguage + ' is not supported');
+			return;
+		}
+
+		var SKs = computedSkills[0];
+		var Goks = computedSkills[1];
+		var defending = computedSkills[4];
+		var setPieces = computedSkills[3];
+		var gameplayStyle = computedSkills[5];
+
 		document.createTR(playerTable, SKs);
 		document.createTRGok(playerTable, Goks);
 
