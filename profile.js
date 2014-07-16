@@ -61,8 +61,8 @@ if (location.href.indexOf("/players/") != -1) {
 
 	var positionNames = ["D C", "D L", "D D", "DM C", "DM L", "DM R", "M C", "M L", "M R", "OM C", "OM L", "OM R", "F", "Gk"];
 	var positionFullNames = {
-		uk: ["Defender Center", "Defender Left", "Defender Right", "Defensive Midfielder Center", "Defensive Midfielder Left", "Defensive Midfielder Right", "Midfielder Center", "Midfielder Left", "Midfielder Right", "Offensive Midfielder Center", "Offensive Midfielder Left", "Offensive Midfielder Right", "Forward", "Goalkeeper"],
-		ua: ["Захисник Центральний", "Захисник Лівий", "Захисник Right", "Опорний Півзахисник Центральний", "Опорний Півзахисник Лівий", "Опорний Півзахисник Right", "Півзахисник Центральний", "Півзахисник Лівий", "Півзахисник Правий", "Атакувальний Півзахисник Центральний", "Атакувальний Півзахисник Лівий", "Атакувальний Півзахисник Правий", "Нападник", "Воротар"],
+		uk: ["defender center", "defender left", "defender right", "defensive midfielder center", "defensive midfielder left", "defensive midfielder right", "midfielder center", "midfielder left", "midfielder right", "offensive midfielder center", "offensive midfielder left", "offensive midfielder right", "forward", "goalkeeper"],
+		ua: ["захисник центральний", "захисник лівий", "захисник right", "опорний півзахисник центральний", "опорний півзахисник лівий", "опорний півзахисник right", "півзахисник центральний", "півзахисник лівий", "півзахисник правий", "атакувальний півзахисник центральний", "атакувальний півзахисник лівий", "атакувальний півзахисник правий", "нападник", "воротар"],
 	}[userLanguage];
 
 	// positionIndex is the array of skill priority for this player.
@@ -201,6 +201,8 @@ if (location.href.indexOf("/players/") != -1) {
 			return -1;
 		}
 
+		position = position.toLowerCase();
+
 		var index = -1;
 		for (var k=0; k< positionFullNames.length; k++) {
 			if (position.indexOf(positionFullNames[k]) == 0) {
@@ -276,49 +278,29 @@ if (location.href.indexOf("/players/") != -1) {
 	}
 	
 	document.createTR = function(table, SKarray) {
-		var tr = document.createElement("tr");
-		var th = document.createElement("th");
-		th.innerHTML = "SK1";
-		tr.appendChild(th);
-		var td = document.createElement("td");
-		td.setAttribute("class", "align_center");
-		td.innerHTML = SKarray[0];
-		tr.appendChild(td);
-		var th = document.createElement("th");
-		th.innerHTML = "SK2";
-		tr.appendChild(th);
-		var td = document.createElement("td");
-		td.setAttribute("class", "align_center");
-		if (SKarray[1] == 0){
-			td.innerHTML = "N/A";
-		} else {
-			td.innerHTML = SKarray[1];
-		}
-		tr.appendChild(td);
-		table.appendChild(tr);
+		var SK1 = SKarray[0],
+			SK2 = SKarray[1] == 0 ? "N/A" : SKarray[1];
+		var $row = $('<tr>\
+			<th>SK1</th>\
+			<td class="align_center">'+ SK1 +'</td>\
+			<th>SK2</th>\
+			<td class="align_center">' + SK2 + '</td>\
+		</tr>');
+
+		$(table).append($row);
 	};
 
 	document.createTRGok = function(table, SKarray) {
-		var tr = document.createElement("tr");
-		var th = document.createElement("th");
-		th.innerHTML = "GokSK1";
-		tr.appendChild(th);
-		var td = document.createElement("td");
-		td.setAttribute("class", "align_center");
-		td.innerHTML = SKarray[0];
-		tr.appendChild(td);
-		var th = document.createElement("th");
-		th.innerHTML = "GokSK2";
-		tr.appendChild(th);
-		var td = document.createElement("td");
-		td.setAttribute("class", "align_center");
-		if (SKarray[1] == 0){
-			td.innerHTML = "N/A";
-		} else {
-			td.innerHTML = SKarray[1];
-		}
-		tr.appendChild(td);
-		table.appendChild(tr);
+		var GokSK1 = SKarray[0],
+			GokSK2 = SKarray[1] == 0 ? "N/A" : SKarray[1];
+		var $row = $('<tr>\
+			<th>GokSK1</th>\
+			<td class="align_center">'+ GokSK1 +'</td>\
+			<th>GokSK2</th>\
+			<td class="align_center">' + GokSK2 + '</td>\
+		</tr>');
+
+		$(table).append($row);
 	};
 	
 	document.createTRSetPieces = function(table, nome, SK) {
