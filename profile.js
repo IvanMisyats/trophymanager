@@ -277,70 +277,17 @@ if (location.href.indexOf("/players/") != -1) {
 		}
 		
 		return [SKs,Gok,Pos,setP,defending,gameplayStyle];
-	}
+	};	
 	
-	document.createTR = function(table, SKarray) {
-		var SK1 = SKarray[0],
-			SK2 = SKarray[1] == 0 ? "N/A" : SKarray[1];
+	document.addSkillsRow = function(table, name1, SK1, name2, SK2) {
 		var $row = $('<tr>\
-			<th>SK1</th>\
+			<th>' + name1 + '</th>\
 			<td class="align_center">'+ SK1 +'</td>\
-			<th>SK2</th>\
+			<th>' + name2 +'</th>\
 			<td class="align_center">' + SK2 + '</td>\
 		</tr>');
 
 		$(table).append($row);
-	};
-
-	document.createTRGok = function(table, SKarray) {
-		var GokSK1 = SKarray[0],
-			GokSK2 = SKarray[1] == 0 ? "N/A" : SKarray[1];
-		var $row = $('<tr>\
-			<th>GokSK1</th>\
-			<td class="align_center">'+ GokSK1 +'</td>\
-			<th>GokSK2</th>\
-			<td class="align_center">' + GokSK2 + '</td>\
-		</tr>');
-
-		$(table).append($row);
-	};
-	
-	document.createTRSetPieces = function(table, nome, SK) {
-		var tr = document.createElement("tr");
-		var th = document.createElement("th");
-		th.innerHTML = "";
-		tr.appendChild(th);
-		var td = document.createElement("td");
-		td.setAttribute("class", "align_center");
-		td.innerHTML = "";
-		tr.appendChild(td);
-		var th = document.createElement("th");
-		th.innerHTML = nome;
-		tr.appendChild(th);
-		var td = document.createElement("td");
-		td.setAttribute("class", "align_center");
-		td.innerHTML = SK;
-		tr.appendChild(td);
-		table.appendChild(tr);
-	};	
-	
-	document.createTRtwoSides = function(table, nome1, SK1, nome2, SK2) {
-		var tr = document.createElement("tr");
-		var th = document.createElement("th");
-		th.innerHTML = nome1;
-		tr.appendChild(th);
-		var td = document.createElement("td");
-		td.setAttribute("class", "align_center");
-		td.innerHTML = SK1;
-		tr.appendChild(td);
-		var th = document.createElement("th");
-		th.innerHTML = nome2;
-		tr.appendChild(th);
-		var td = document.createElement("td");
-		td.setAttribute("class", "align_center");
-		td.innerHTML = SK2;
-		tr.appendChild(td);
-		table.appendChild(tr);
 	};	
 	
 	(function() {
@@ -360,19 +307,19 @@ if (location.href.indexOf("/players/") != -1) {
 		var setPieces = computedSkills[3];
 		var gameplayStyle = computedSkills[5];
 
-		document.createTR(playerTable, SKs);
-		document.createTRGok(playerTable, Goks);
+		document.addSkillsRow(playerTable, "SK1", SKs[0], "SK2", SKs[1] == 0 ? "N/A" : SKs[1]);
+		document.addSkillsRow(playerTable, "GokSK1", Goks[0], "GokSK2", Goks[1] == 0 ? "N/A" : Goks[1]);
 
 		if(computeSK(skillArray)[2] != 13){
-			document.createTRtwoSides(playerTable, "Def. Direct", defending[0]+"%", "Play Direct", gameplayStyle[0]+"%");
-			document.createTRtwoSides(playerTable, "Def. Wings", defending[1]+"%", "Play Wings", gameplayStyle[1]+"%");
-			document.createTRtwoSides(playerTable, "Def. Shorpassing", defending[2]+"%", "Play Shorpassing", gameplayStyle[2]+"%");
-			document.createTRtwoSides(playerTable, "Def. Long Balls", defending[3]+"%", "Play Long Balls", gameplayStyle[3]+"%");
-			document.createTRtwoSides(playerTable, "Def. Through Balls", defending[4]+"%", "Play Through Balls", gameplayStyle[4]+"%");
+			document.addSkillsRow(playerTable, "Def. Direct", defending[0]+"%", "Play Direct", gameplayStyle[0]+"%");
+			document.addSkillsRow(playerTable, "Def. Wings", defending[1]+"%", "Play Wings", gameplayStyle[1]+"%");
+			document.addSkillsRow(playerTable, "Def. Shorpassing", defending[2]+"%", "Play Shorpassing", gameplayStyle[2]+"%");
+			document.addSkillsRow(playerTable, "Def. Long Balls", defending[3]+"%", "Play Long Balls", gameplayStyle[3]+"%");
+			document.addSkillsRow(playerTable, "Def. Through Balls", defending[4]+"%", "Play Through Balls", gameplayStyle[4]+"%");
 
-			document.createTRSetPieces(playerTable, "Corner Kicks 0-20", setPieces[0]);
-			document.createTRSetPieces(playerTable, "Free Kicks 0-20", setPieces[1]);
-			document.createTRSetPieces(playerTable, "Penalty Kicks 0-20", setPieces[2]); 
+			document.addSkillsRow(playerTable, "", "", "Corner Kicks 0-20", setPieces[0]);
+			document.addSkillsRow(playerTable, "", "", "Free Kicks 0-20", setPieces[1]);
+			document.addSkillsRow(playerTable, "", "", "Penalty Kicks 0-20", setPieces[2]); 
 		}
 		
 	})();
