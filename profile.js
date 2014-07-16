@@ -101,7 +101,7 @@ if (location.href.indexOf("/players/") != -1) {
 		totSkill[2][1] = ((skills[12]*2+skills[13]*2)+skills[9]*1)/5;// Free kick
 		totSkill[2][2] = ((skills[11]*2+skills[13]*2)+skills[9]*1)/5;// penalty
 		
-		if(positionIndex != 13){ // is not goalkeeper is defender
+		if(positionIndex != 13){ // is not goalkeeper
 			totSkill[3][0] =(skills[3]*3+skills[6]*3+skills[5]*3+skills[4]*2+skills[2]*2+skills[1]*1)/280;
 			totSkill[3][1] =(skills[2]*3+skills[4]*3+skills[3]*3+skills[6]*2+skills[5]*2+skills[1]*1+skills[0]*1)/300;
 			totSkill[3][2] =(skills[3]*3+skills[6]*3+skills[5]*3+skills[4]*2+skills[2]*2+skills[1]*1)/280;
@@ -135,40 +135,40 @@ if (location.href.indexOf("/players/") != -1) {
 			// calculate the potential attacking style
 			
 			if(positionIndex == 12){//F
-			totSkill[4][0] = totSkill[4][0]*0.2 + ((finReg*3+finCab*2+finRem*1)/6)*0.8;
-			totSkill[4][1] = totSkill[4][1]*0.2 + ((finReg*2+finCab*3+finRem*1)/6)*0.8;
-			totSkill[4][2] = totSkill[4][2]*0.2 + ((finReg*3+finCab*1+finRem*2)/6)*0.8;
-			totSkill[4][3] = totSkill[4][3]*0.2 + ((finReg*1+finCab*4+finRem*1)/6)*0.8;
-			totSkill[4][4] = totSkill[4][4]*0.2 + ((finReg*4+finCab*1+finRem*1)/6)*0.8; 
+				totSkill[4][0] = totSkill[4][0]*0.2 + ((finReg*3+finCab*2+finRem*1)/6)*0.8;
+				totSkill[4][1] = totSkill[4][1]*0.2 + ((finReg*2+finCab*3+finRem*1)/6)*0.8;
+				totSkill[4][2] = totSkill[4][2]*0.2 + ((finReg*3+finCab*1+finRem*2)/6)*0.8;
+				totSkill[4][3] = totSkill[4][3]*0.2 + ((finReg*1+finCab*4+finRem*1)/6)*0.8;
+				totSkill[4][4] = totSkill[4][4]*0.2 + ((finReg*4+finCab*1+finRem*1)/6)*0.8; 
 			}
 			if(positionIndex >= 9 && positionIndex <= 11){//OM
-			totSkill[4][0] = totSkill[4][0]*0.45 + ((finReg*3+finCab*2+finRem*1)/6)*0.55;
-			totSkill[4][1] = totSkill[4][1]*0.45 + ((finReg*2+finCab*3+finRem*1)/6)*0.55;
-			totSkill[4][2] = totSkill[4][2]*0.45 + ((finReg*3+finCab*1+finRem*2)/6)*0.55;
-			totSkill[4][3] = totSkill[4][3]*0.45 + ((finReg*1+finCab*4+finRem*1)/6)*0.55;
-			totSkill[4][4] = totSkill[4][4]*0.45 + ((finReg*4+finCab*1+finRem*1)/6)*0.55; 			
+				totSkill[4][0] = totSkill[4][0]*0.45 + ((finReg*3+finCab*2+finRem*1)/6)*0.55;
+				totSkill[4][1] = totSkill[4][1]*0.45 + ((finReg*2+finCab*3+finRem*1)/6)*0.55;
+				totSkill[4][2] = totSkill[4][2]*0.45 + ((finReg*3+finCab*1+finRem*2)/6)*0.55;
+				totSkill[4][3] = totSkill[4][3]*0.45 + ((finReg*1+finCab*4+finRem*1)/6)*0.55;
+				totSkill[4][4] = totSkill[4][4]*0.45 + ((finReg*4+finCab*1+finRem*1)/6)*0.55; 			
 			}
 			if(positionIndex >= 6 && positionIndex <= 8){//M
-			totSkill[4][0] = totSkill[4][0]*0.55 + ((finReg*3+finCab*2+finRem*1)/6)*0.45;
-			totSkill[4][1] = totSkill[4][1]*0.55 + ((finReg*2+finCab*3+finRem*1)/6)*0.45;
-			totSkill[4][2] = totSkill[4][2]*0.55 + ((finReg*3+finCab*1+finRem*2)/6)*0.45;
-			totSkill[4][3] = totSkill[4][3]*0.55 + ((finReg*1+finCab*4+finRem*1)/6)*0.45;
-			totSkill[4][4] = totSkill[4][4]*0.55 + ((finReg*4+finCab*1+finRem*1)/6)*0.45; 
+				totSkill[4][0] = totSkill[4][0]*0.55 + ((finReg*3+finCab*2+finRem*1)/6)*0.45;
+				totSkill[4][1] = totSkill[4][1]*0.55 + ((finReg*2+finCab*3+finRem*1)/6)*0.45;
+				totSkill[4][2] = totSkill[4][2]*0.55 + ((finReg*3+finCab*1+finRem*2)/6)*0.45;
+				totSkill[4][3] = totSkill[4][3]*0.55 + ((finReg*1+finCab*4+finRem*1)/6)*0.45;
+				totSkill[4][4] = totSkill[4][4]*0.55 + ((finReg*4+finCab*1+finRem*1)/6)*0.45; 
 			}
 			if(positionIndex >= 3 && positionIndex <= 5){//DM
-			totSkill[4][0] = totSkill[4][0]*0.65 + ((finReg*3+finCab*2+finRem*1)/6)*0.35;
-			totSkill[4][1] = totSkill[4][1]*0.65 + ((finReg*2+finCab*3+finRem*1)/6)*0.35;
-			totSkill[4][2] = totSkill[4][2]*0.65 + ((finReg*3+finCab*1+finRem*2)/6)*0.35;
-			totSkill[4][3] = totSkill[4][3]*0.65 + ((finReg*1+finCab*4+finRem*1)/6)*0.35;
-			totSkill[4][4] = totSkill[4][4]*0.65 + ((finReg*4+finCab*1+finRem*1)/6)*0.35; 	
+				totSkill[4][0] = totSkill[4][0]*0.65 + ((finReg*3+finCab*2+finRem*1)/6)*0.35;
+				totSkill[4][1] = totSkill[4][1]*0.65 + ((finReg*2+finCab*3+finRem*1)/6)*0.35;
+				totSkill[4][2] = totSkill[4][2]*0.65 + ((finReg*3+finCab*1+finRem*2)/6)*0.35;
+				totSkill[4][3] = totSkill[4][3]*0.65 + ((finReg*1+finCab*4+finRem*1)/6)*0.35;
+				totSkill[4][4] = totSkill[4][4]*0.65 + ((finReg*4+finCab*1+finRem*1)/6)*0.35; 	
 			}
 			if(positionIndex <= 2){//D
-			totSkill[4][0] = totSkill[4][0]*0.90 + ((finReg*3+finCab*2+finRem*1)/6)*0.10;
-			totSkill[4][1] = totSkill[4][1]*0.90 + ((finReg*2+finCab*3+finRem*1)/6)*0.10;
-			totSkill[4][2] = totSkill[4][2]*0.90 + ((finReg*3+finCab*1+finRem*2)/6)*0.10;
-			totSkill[4][3] = totSkill[4][3]*0.90 + ((finReg*1+finCab*4+finRem*1)/6)*0.10;
-			totSkill[4][4] = totSkill[4][4]*0.90 + ((finReg*4+finCab*1+finRem*1)/6)*0.10; 			
-			// different weights to different positions
+				totSkill[4][0] = totSkill[4][0]*0.90 + ((finReg*3+finCab*2+finRem*1)/6)*0.10;
+				totSkill[4][1] = totSkill[4][1]*0.90 + ((finReg*2+finCab*3+finRem*1)/6)*0.10;
+				totSkill[4][2] = totSkill[4][2]*0.90 + ((finReg*3+finCab*1+finRem*2)/6)*0.10;
+				totSkill[4][3] = totSkill[4][3]*0.90 + ((finReg*1+finCab*4+finRem*1)/6)*0.10;
+				totSkill[4][4] = totSkill[4][4]*0.90 + ((finReg*4+finCab*1+finRem*1)/6)*0.10; 			
+				// different weights to different positions
 			}
 			
 			totSkill[4][0] = Math.round(totSkill[4][0]);
@@ -243,6 +243,7 @@ if (location.href.indexOf("/players/") != -1) {
 		var Pos = -1;
 		var positionCell = document.getElementsByClassName("favposition long")[0].childNodes;
 		var positionArray = [];
+
 		if (positionCell.length == 1){
 				positionArray[0] = positionCell[0].textContent;
 		} else if (positionCell.length == 2){
@@ -257,20 +258,21 @@ if (location.href.indexOf("/players/") != -1) {
 				positionArray[0] = positionCell[0].textContent + positionCell[1].textContent;
 				positionArray[1] = positionCell[0].textContent + positionCell[3].textContent;
 		}
+
 		for (var i = 0; i < positionArray.length; i++){
 				var positionIndex = document.findPositionIndex(positionArray[i]);
 				var skillAntes=0;
 				if (positionIndex > -1) {
-					var resultado = document.calculateSkill(positionIndex, skills);
-					SKs[i] = resultado[0];
-					Gok[i] = resultado[1];
-					setP = resultado[2];
-					defending = resultado[3];
-					if(resultado[0]>=skillAntes){
-						gameplayStyle = resultado[4];
+					var result = document.calculateSkill(positionIndex, skills);
+					SKs[i] = result[0];
+					Gok[i] = result[1];
+					setP = result[2];
+					defending = result[3];
+					if(result[0]>=skillAntes){
+						gameplayStyle = result[4];
 					} 
 					Pos = positionIndex;
-					skillAntes = resultado[0];
+					skillAntes = result[0];
 				}
 		}
 		
