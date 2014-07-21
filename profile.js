@@ -50,7 +50,7 @@ if (location.href.indexOf("/players/") != -1) {
 			[90,10, 0],  // DM C
 			[50,40,10],  // DM L
 			[50,40,10],  // DM R
-			[85,12, 3],  // M C			   
+			[85,12, 3],  // M C
 			[90, 7, 3],  // M L
 			[90, 7, 3],  // M R
 			[90,10, 0],  // OM C
@@ -62,7 +62,7 @@ if (location.href.indexOf("/players/") != -1) {
 	var positionNames = ["D C", "D L", "D D", "DM C", "DM L", "DM R", "M C", "M L", "M R", "OM C", "OM L", "OM R", "F", "Gk"];
 	var positionFullNames = {
 		uk: ["defender center", "defender left", "defender right", "defensive midfielder center", "defensive midfielder left", "defensive midfielder right", "midfielder center", "midfielder left", "midfielder right", "offensive midfielder center", "offensive midfielder left", "offensive midfielder right", "forward", "goalkeeper"],
-		ua: ["захисник центральний", "захисник лівий", "захисник right", "опорний півзахисник центральний", "опорний півзахисник лівий", "опорний півзахисник right", "півзахисник центральний", "півзахисник лівий", "півзахисник правий", "атакувальний півзахисник центральний", "атакувальний півзахисник лівий", "атакувальний півзахисник правий", "нападник", "воротар"],
+		ua: ["захисник центральний", "захисник лівий", "захисник правий", "опорний півзахисник центральний", "опорний півзахисник лівий", "опорний півзахисник правий", "півзахисник центральний", "півзахисник лівий", "півзахисник правий", "атакувальний півзахисник центральний", "атакувальний півзахисник лівий", "атакувальний півзахисник правий", "нападник", "воротар"],
 	}[userLanguage];
 
 	// positionIndex is the array of skill priority for this player.
