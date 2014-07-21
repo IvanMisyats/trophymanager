@@ -13,13 +13,36 @@
 // show an error
 function error(message) {
 	GM_log(message);
-};
+}
+
+function log(message) {
+	GM_log(message);
+}
+
 
 if (location.href.indexOf("/players/") != -1) {
 	function getUserLanguage() {
-		return document.cookie.match(/trophymanager\[language\]=(\w+)/)[1] || "uk";
-	};
+		function findLangInString(str, regex, matchIndex) {
+			if (!str) return false;
+
+			var searchResult = str.match(regex);
+
+			if (searchResult.length <= matchIndex) return false;
+
+			return searchResult[matchIndex];
+		}
+
+		return findLangInString( $("script[src*='lang']:first").attr('src'), /lang=(\w+)/, 1) ||
+			   findLangInString( document.cookie, /trophymanager\[language\]=(\w+)/, 1);
+	}
 	var userLanguage = getUserLanguage();
+
+	if (userLanguage) {
+		log('User language is detected: ' + userLanguage);
+	} else {
+		error('Cannot detect user language. Trying to use "uk" as default');
+		userLanguage = "uk";
+	}
 
 	// Array to setup the weights of particular skills for each player's actual ability
 	// This is the direct weight to be given to each skill.
