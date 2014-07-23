@@ -315,6 +315,15 @@ if (location.href.indexOf("/players/") != -1) {
 
 		$(table).append($row);
 	};	
+
+	document.addSkillsRowToInfoTable = function(SK) {
+		var $sk_row = $('<tr><th>SK</th><td>' + SK + '</td></tr>');
+		if ($('table.info_table td:first-child').attr('rowspan') == '10') {
+			$sk_row.addClass('odd');
+		} 
+
+		$('table.info_table tbody').append($sk_row);
+	};
 	
 	(function() {
 		var playerTable = document.getElementsByClassName("skill_table zebra")[0];
@@ -333,6 +342,7 @@ if (location.href.indexOf("/players/") != -1) {
 		var setPieces = computedSkills[3];
 		var gameplayStyle = computedSkills[5];
 
+		document.addSkillsRowToInfoTable( SKs[1] == 0 ? SKs[0] : SKs[0] +'/' + SKs[1] );
 		document.addSkillsRow(playerTable, "SK1", SKs[0], "SK2", SKs[1] == 0 ? "N/A" : SKs[1]);
 		document.addSkillsRow(playerTable, "GokSK1", Goks[0], "GokSK2", Goks[1] == 0 ? "N/A" : Goks[1]);
 
