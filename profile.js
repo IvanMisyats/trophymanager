@@ -84,8 +84,11 @@ if (location.href.indexOf("/players/") != -1) {
 
 	var positionNames = ["D C", "D L", "D D", "DM C", "DM L", "DM R", "M C", "M L", "M R", "OM C", "OM L", "OM R", "F", "Gk"];
 	var positionFullNames = {
-		uk: ["defender center", "defender left", "defender right", "defensive midfielder center", "defensive midfielder left", "defensive midfielder right", "midfielder center", "midfielder left", "midfielder right", "offensive midfielder center", "offensive midfielder left", "offensive midfielder right", "forward", "goalkeeper"],
+		es: ["defensa central", "defensa izquierdo", "defensa derecho", "mediocampista defensivo central", "mediocampista defensivo izquierdo", "mediocampista defensivo derecho", "mediocampista central", "mediocampista izquierdo", "mediocampista derecho", "mediocampista ofensivo central", "mediocampista ofensivo izquierdo", "mediocampista ofensivo derecho", "delantero", "portero"],
+		pt: ["defesa centro", "defesa esquerdo", "defesa direito", "médio defensivo centro", "médio defensivo esquerdo", "médio defensivo direito", "medio centro", "medio esquerdo", "medio direito", "medio ofensivo centro", "medio ofensivo esquerdo", "medio ofensivo direito", "avançado", "guarda-redes"],
+		qs: ["defensor central", "defensor izquierdo", "defensor derecho", "medio defensivo central", "medio defensivo izquierdo", "medio defensivo derecho", "mediocampista central", "mediocampista izquierdo", "mediocampista derecho", "medio ofensivo central", "medio ofensivo izquierdo", "medio ofensivo derecho", "delantero", "portero"],
 		ua: ["захисник центральний", "захисник лівий", "захисник правий", "опорний півзахисник центральний", "опорний півзахисник лівий", "опорний півзахисник правий", "півзахисник центральний", "півзахисник лівий", "півзахисник правий", "атакувальний півзахисник центральний", "атакувальний півзахисник лівий", "атакувальний півзахисник правий", "нападник", "воротар"],
+		uk: ["defender center", "defender left", "defender right", "defensive midfielder center", "defensive midfielder left", "defensive midfielder right", "midfielder center", "midfielder left", "midfielder right", "offensive midfielder center", "offensive midfielder left", "offensive midfielder right", "forward", "goalkeeper"],
 	}[userLanguage];
 
 	// positionIndex is the array of skill priority for this player.
