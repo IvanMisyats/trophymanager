@@ -1,13 +1,13 @@
 ﻿// ==UserScript==
-// @name		   TrophyManager - Super Profile Page
-// @description	In TrophyManager.com Shows TrExMa Value for Favorite Positions for Player
-// @include		http://trophymanager.com/players/*
-// @exclude		http://trophymanager.com/players
-// @include		https://trophymanager.com/players/*
-// @exclude		https://trophymanager.com/players
-// @author    	  Joao Manuel Ferreira Fernandes
-// @github		  https://github.com/IvanMisyats/trophymanager
-// @grant 		GM_log
+// @name			TrophyManager - Super Profile Page
+// @description		In TrophyManager.com Shows TrExMa Value for Favorite Positions for Player
+// @include			http://trophymanager.com/players/*
+// @exclude			http://trophymanager.com/players
+// @include			https://trophymanager.com/players/*
+// @exclude			https://trophymanager.com/players
+// @author			Joao Manuel Ferreira Fernandes
+// @github			https://github.com/IvanMisyats/trophymanager
+// @grant			GM_log
 // ==/UserScript==
 
 // show an error
@@ -20,7 +20,10 @@ function log(message) {
 }
 
 
-if (location.href.indexOf("/players/") != -1) {
+if (location.href.indexOf("/players/") != -1 
+	// not "/players/" page
+	&& location.href.indexOf("/players/") != (location.href.length - 9) ) {
+
 	function getUserLanguage() {
 		function findLangInString(str, regex, matchIndex) {
 			if (!str) return false;
@@ -64,10 +67,9 @@ if (location.href.indexOf("/players/") != -1) {
 			 [  1,  2,  2,  3,  3,  2,  2,  3,  3,  2,  1,  1,  1,  3], // F
 			 [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]]; // Gk
 
-
-	// [  2,  3,  2,  1,  2,  1,  2,  2,  3,  3,  3]
 	// Weights need to total 100
-	var weights = [ [85,12, 3],  // D C
+	var weights = 
+		  [ [85,12, 3],  // D C
 			[70,25, 5],  // D L
 			[70,25, 5],  // D R
 			[90,10, 0],  // DM C
