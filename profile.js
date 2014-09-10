@@ -3,8 +3,10 @@
 // @description		In TrophyManager.com Shows TrExMa Value for Favorite Positions for Player
 // @include			http://trophymanager.com/players/*
 // @exclude			http://trophymanager.com/players
+// @exclude			http://trophymanager.com/players/
 // @include			https://trophymanager.com/players/*
 // @exclude			https://trophymanager.com/players
+// @exclude			https://trophymanager.com/players/
 // @author			Joao Manuel Ferreira Fernandes
 // @github			https://github.com/IvanMisyats/trophymanager
 // @grant			GM_log
@@ -344,7 +346,6 @@ if (location.href.indexOf("/players/") != -1
 		var setPieces = computedSkills[3];
 		var gameplayStyle = computedSkills[5];
 
-		document.addSkillsRowToInfoTable( SKs[1] == 0 ? SKs[0] : SKs[0] +'/' + SKs[1] );
 		document.addSkillsRow(playerTable, "SK1", SKs[0], "SK2", SKs[1] == 0 ? "N/A" : SKs[1]);
 		document.addSkillsRow(playerTable, "GokSK1", Goks[0], "GokSK2", Goks[1] == 0 ? "N/A" : Goks[1]);
 
@@ -358,7 +359,16 @@ if (location.href.indexOf("/players/") != -1
 			document.addSkillsRow(playerTable, "", "", "Corner Kicks 0-20", setPieces[0]);
 			document.addSkillsRow(playerTable, "", "", "Free Kicks 0-20", setPieces[1]);
 			document.addSkillsRow(playerTable, "", "", "Penalty Kicks 0-20", setPieces[2]); 
+
+			var defendingSum = Math.round((defending[0] + defending[1] + defending[2] + defending[3] + defending[4])/5);
+			var attackSum = Math.round((gameplayStyle[0] + gameplayStyle[1] + gameplayStyle[2] + gameplayStyle[3] + gameplayStyle[4])/5);
 		}
+
+		var infoSK = SKs[1] == 0 ? SKs[0] : SKs[0] +'/' + SKs[1];
+		if (defendingSum && attackSum) {
+			infoSK += ' (' + defendingSum +'/' + attackSum + ')';
+		}
+		document.addSkillsRowToInfoTable( infoSK );
 		
 	})();
 }
